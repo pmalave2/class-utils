@@ -78,8 +78,6 @@ public class ActiveDirectory {
         }    
 
         // Attempt to modify the user password.
-
-        System.out.println("Going to replace the user's password.");
         final Modification mod = new Modification(ModificationType.REPLACE, "unicodePwd", quotedPasswordBytes);
         connection.modify(userDN, mod);
     }
@@ -91,7 +89,7 @@ public class ActiveDirectory {
      * @throws  LDAPException  If a problem is encountered while performing any
      *                         of the required processing.
      */
-    public void connect() throws LDAPException{
+    public void connect() throws LDAPException {
         // Create an SSL socket factory to use during the course of establishing
         // an SSL-based connection to the server.  For simplicity, we'll cheat and
         // use a trust manager that will trust any certificate that the server
@@ -107,7 +105,6 @@ public class ActiveDirectory {
         }
 
         // Create a secure connection to the Active Directory server.
-        System.out.println("Going to establish the secure connection.");
         connection = new LDAPConnection(socketFactory, adHost, adSSLPort, bindDN, bindPassword);
     }
     
@@ -124,8 +121,8 @@ public class ActiveDirectory {
         }
         return Boolean.TRUE;
     }
-    public void disconnect(){
-        System.out.println("Closing the connection.");
+    
+    public void disconnect() {
         connection.close();
     }
     

@@ -11,7 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 
 public class DAOTransacciones extends ConnManager {
-    static final org.apache.logging.log4j.Logger LOGGER = LogManager.getLogger(DAOTransacciones.class.getName());
+    static final org.apache.logging.log4j.Logger LOGGER = LogManager.getLogger(DAOTransacciones.class);
 
     public DAOTransacciones() {
     }

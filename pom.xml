@@ -28,6 +28,23 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.6.1</version>
             </plugin>
+            <plugin>
+                <artifactId>maven-remote-resources-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>bundle</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <includes>
+                        <include>**/log4j2.xml</include>
+                        <include>**/log4j2_tomcat.xml</include>
+                    </includes>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
     

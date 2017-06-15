@@ -67,6 +67,7 @@ public class ConnManager {
         
         return this;
     }
+    
     public ConnManager conectarJDNI() throws Exception {
         Context initContext = new InitialContext();
         Context webContext = (Context) initContext.lookup("java:/comp/env");

@@ -31,6 +31,7 @@ public class Numero {
     	
         return formatNumero(monto);
     }
+    
     public String formatNumeroSinPunto(Integer str) {
         if (str == null) {
             return null;
@@ -39,6 +40,7 @@ public class Numero {
     	
         return formatNumero(monto);
     }
+    
     public String formatNumeroSinPunto(Long str) {
         if (str == null) {
             return null;

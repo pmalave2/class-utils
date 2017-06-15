@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="all" name="general">
+    <Appenders>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout>
+                <Pattern>%-5p | %d{yyyy-MM-dd HH:mm:ss} | [%t] %logger{36} : %m%n</Pattern>
+            </PatternLayout> 
+        </Console>
+        <RandomAccessFile name="RAF" fileName="${sys:catalina.home}/logs/app.log" immediateFlush="false" append="true">
+            <PatternLayout>
+                <Pattern>%-5p | %d{yyyy-MM-dd HH:mm:ss} | [%t] %logger{36} : %m%n</Pattern>
+            </PatternLayout> 
+        </RandomAccessFile>
+    </Appenders>
+    <Loggers>
+        <asyncRoot level="error">
+            <AppenderRef ref="RAF"/>
+            <AppenderRef ref="STDOUT"/>
+        </asyncRoot>
+        <asyncRoot level="info">
+            <AppenderRef ref="RAF"/>
+            <AppenderRef ref="STDOUT"/>
+        </asyncRoot>
+        <asyncRoot level="trace">
+            <AppenderRef ref="RAF"/>
+            <AppenderRef ref="STDOUT"/>
+        </asyncRoot>
+    </Loggers>
+</Configuration>
