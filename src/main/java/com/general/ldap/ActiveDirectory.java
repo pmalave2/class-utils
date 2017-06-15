@@ -68,7 +68,6 @@ public class ActiveDirectory {
            throws LDAPException, UnsupportedEncodingException {
         // Properly encode the password.  It must be enclosed in quotation marks,
         // and it must use a UTF-16LE encoding.
-        System.out.println("Going to encode the password.");
         final byte[] quotedPasswordBytes;
         try {
           final String quotedPassword = '"' + newPassword + '"';

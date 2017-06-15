@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="all" name="general" monitorInterval="1800">
+<Configuration status="WARN" name="general" monitorInterval="1800">
     <Appenders>
         <Console name="STDOUT" target="SYSTEM_OUT">
             <PatternLayout>
@@ -9,7 +9,11 @@
         <RandomAccessFile name="RAF" fileName="${sys:catalina.home}/logs/app.log" immediateFlush="false" append="true">
             <PatternLayout>
                 <Pattern>%-5p | %d{yyyy-MM-dd HH:mm:ss} | [%t] %logger{36} : %m%n</Pattern>
-            </PatternLayout> 
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="5"/>
         </RandomAccessFile>
     </Appenders>
     <Loggers>
