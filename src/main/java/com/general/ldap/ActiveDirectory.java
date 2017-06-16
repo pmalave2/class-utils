@@ -94,7 +94,6 @@ public class ActiveDirectory {
         // use a trust manager that will trust any certificate that the server
         // presents, but in production environments you should validate the
         // certificate more carefully.
-        System.out.println("Going to create the SSL socket factory.");
         final SSLSocketFactory socketFactory;
         final SSLUtil sslUtil = new SSLUtil(new TrustAllTrustManager());
         try{
