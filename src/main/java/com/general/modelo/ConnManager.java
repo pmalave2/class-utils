@@ -37,6 +37,7 @@ public class ConnManager {
         this.propiedades = propiedades;
         this.usuarioBD = usuarioBD;
         this.passwordUsuarioBD = passwordUsuarioBD;
+        this.connectionString = url + servidor + ":" + puerto + "/" + nombreBD + propiedades;
     }
     
     public ConnManager(String jndi){
@@ -60,8 +61,6 @@ public class ConnManager {
         } catch (ClassNotFoundException ex) {
             throw new SQLException("Error con el driver " + ex.getMessage());
         }
-
-        connectionString = url + nombreIPServidorBD + ":" + puertoServidorBD + "/" + nombreBD + propiedades;
 
         conexion = DriverManager.getConnection(connectionString, usuarioBD, passwordUsuarioBD);
         
@@ -203,5 +202,9 @@ public class ConnManager {
 
     public String getConnectionString() {
         return connectionString = url + nombreIPServidorBD + ":" + puertoServidorBD + "/" + nombreBD + propiedades;
+    }
+    
+    public void setConnectionString(String connectionString) {
+        this.connectionString = connectionString;
     }
 }
