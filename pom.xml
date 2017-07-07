@@ -6,12 +6,6 @@
     <version>0.3.0</version>
     <packaging>jar</packaging>
     
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-    </properties>
-    
     <name>Usos Generales</name>
     
     <organization>
@@ -22,11 +16,23 @@
         <maven>3.0.0</maven>
     </prerequisites>
     
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version.source>1.8</java.version.source>
+        <java.version.target>1.8</java.version.target>
+    </properties>
+    
     <build>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.6.1</version>
+                <configuration>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <showDeprecation>true</showDeprecation>
+                    <source>${java.version.source}</source>
+                    <target>${java.version.target}</target>
+                </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-remote-resources-plugin</artifactId>
@@ -67,12 +73,12 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.5</version>
+            <version>3.6</version>
         </dependency>
         <dependency>
             <groupId>com.unboundid</groupId>
             <artifactId>unboundid-ldapsdk</artifactId>
-            <version>3.2.1</version>
+            <version>4.0.0</version>
         </dependency>
     </dependencies>
 </project>
