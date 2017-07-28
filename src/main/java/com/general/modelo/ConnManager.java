@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 public class ConnManager {
@@ -44,22 +45,11 @@ public class ConnManager {
         this.jndi = jndi;
     }
     
-    /**
-     * Establece una conexion a la DB configurada. 
-     * <p>
-     * NOTA: Para operaciones de edicion (C_UD), hacer commit manual
-     * </p>
-     * @return	El objeto ConnManager con la conexion establecida
-     * @throws java.lang.Exception
-     * @see     ConnManager
-     * @
-     * */
     public ConnManager conectar() throws Exception {
-        //... colcar aqui el codigo para conectar al SMBD deseado
         try {
-            Class.forName(driver); // registro el driver de la SMBD
+            Class.forName(driver);
         } catch (ClassNotFoundException ex) {
-            throw new SQLException("Error con el driver " + ex.getMessage());
+            throw new SQLException("Error con el driver " + ex.getMessage(), ex);
         }
 
         conexion = DriverManager.getConnection(connectionString, usuarioBD, passwordUsuarioBD);
@@ -67,12 +57,18 @@ public class ConnManager {
         return this;
     }
     
-    public ConnManager conectarJDNI() throws Exception {
-        Context initContext = new InitialContext();
-        Context webContext = (Context) initContext.lookup("java:/comp/env");
-        
-        DataSource ds = (DataSource) webContext.lookup(jndi);
-        conexion = ds.getConnection();
+    public ConnManager conectarJDNI() throws SQLException  {
+        try {
+            Context initContext = new InitialContext();
+            Context webContext = (Context) initContext.lookup("java:/comp/env");
+
+            DataSource ds = (DataSource) webContext.lookup(jndi);
+            conexion = ds.getConnection();
+        } catch (NamingException ex) {
+            throw new SQLException("Error en el nombre de DataSource " + ex.getMessage(), ex);
+        } catch (SQLException ex) {
+            throw new SQLException("Error obteniedo el DataSource " + ex.getMessage(), ex);
+        }
         
         return this;
     }
@@ -82,7 +78,7 @@ public class ConnManager {
             return sentencia.executeUpdate();
         }
         catch (SQLException ex) {
-            throw new SQLException("Error en modificacion de BD \nCodigo:" + ex.getErrorCode() + " Explicacion:" + ex.getMessage());
+            throw new SQLException("Error en modificacion de BD \nCodigo:" + ex.getErrorCode() + " Explicacion:" + ex.getMessage(), ex);
         }
     }
 
@@ -92,7 +88,7 @@ public class ConnManager {
             return sentencia.executeQuery();
         }
         catch (SQLException ex) {
-            throw new SQLException("Error en consulta de BD \nCodigo:" + ex.getErrorCode() + " Explicacion:" + ex.getMessage());
+            throw new SQLException("Error en consulta de BD \nCodigo:" + ex.getErrorCode() + " Explicacion:" + ex.getMessage(), ex);
         }
     }
 
@@ -108,7 +104,7 @@ public class ConnManager {
         try {
             return conexion.prepareStatement(sql);
         } catch (SQLException ex) {
-            throw new SQLException("Error en creacion de sentecia DB \nCodigo:" + ex.getErrorCode() + " Explicacion:" + ex.getMessage());
+            throw new SQLException("Error en creacion de sentecia DB \nCodigo:" + ex.getErrorCode() + " Explicacion:" + ex.getMessage(), ex);
         }
     }
 

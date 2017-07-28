@@ -23,7 +23,7 @@ public class Archivo {
     private OutputStream os;
     private Charset oscs;
 
-    public Archivo(){
+    public Archivo() {
     }
 
     public Archivo(File archivo) {
@@ -46,21 +46,17 @@ public class Archivo {
         this.oscs = Charset.forName(encoder);
     }
 
-    public List<String> leer() { 
+    public List<String> leer() throws FileNotFoundException { 
         Scanner s;
 
         List<String> data = new ArrayList<>();
 
-        try {
-            s = new Scanner(archivo);
-            while (s.hasNextLine()) {                
-                data.add(s.nextLine());
-            }
-
-            s.close();
-        } catch (FileNotFoundException e) {
-            return data;
+        s = new Scanner(archivo);
+        while (s.hasNextLine()) {                
+            data.add(s.nextLine());
         }
+
+        s.close();
 
         return data;
     }
@@ -99,7 +95,7 @@ public class Archivo {
         os.write(System.getProperty("line.separator").getBytes());
     }
     
-    public void deleteWorkFiles(String ruta){
+    public void deleteWorkFiles(String ruta) {
     	File f = new File(ruta); // current directory
 
         FilenameFilter acpFilter = (File dir, String name) -> {
@@ -122,13 +118,13 @@ public class Archivo {
     	File arch = new File(ruta);
     	
     	if (!arch.exists()) {
-            if (!arch.mkdir()){
+            if (!arch.mkdir()) {
                 arch.mkdirs();
             }
     	}
     }
     
-    public Boolean moveFile(String directoryPath) throws IOException{
+    public Boolean moveFile(String directoryPath) throws IOException {
     	File path = new File(directoryPath);
     	
     	makeDirectory(directoryPath);
@@ -139,7 +135,7 @@ public class Archivo {
         return Files.move(archivo.toPath(), path.toPath().resolve(archivo.toPath().getFileName()), StandardCopyOption.REPLACE_EXISTING).toFile().exists();
     }    
 
-    public Boolean copyFile(String directoryPath) throws IOException{
+    public Boolean copyFile(String directoryPath) throws IOException {
     	File path = new File(directoryPath);
 
     	makeDirectory(directoryPath);
@@ -150,13 +146,13 @@ public class Archivo {
         return Files.copy(archivo.toPath(), path.toPath().resolve(archivo.toPath().getFileName()), StandardCopyOption.REPLACE_EXISTING).toFile().exists();
     }
         
-    public void renameFile(File arc){
-        if (archivo.renameTo(arc)){
+    public void renameFile(File arc) {
+        if (archivo.renameTo(arc)) {
             archivo = arc;
         }
     }
     
-    public static void copyFiles(String path, Archivo... files) throws IOException{
+    public static void copyFiles(String path, Archivo... files) throws IOException {
         for (Archivo arc : files){
             arc.copyFile(path);
             arc.getArchivo().delete();

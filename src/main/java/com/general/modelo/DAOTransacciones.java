@@ -8,10 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.LogManager;
 
 public class DAOTransacciones extends ConnManager {
-    static final org.apache.logging.log4j.Logger LOGGER = LogManager.getLogger(DAOTransacciones.class);
 
     public DAOTransacciones() {
     }
@@ -46,9 +44,9 @@ public class DAOTransacciones extends ConnManager {
     public List<List<String>> getTransactiones(PreparedStatement sentencia) throws Exception {
         List<List<String>> filas;
 
-        LOGGER.info("CONSULTA INICIADA");
+        System.out.println("CONSULTA INICIADA");
         filas = getResults(consultar(sentencia));
-    	LOGGER.info("CONSULTA FINALIZADA");
+    	System.out.println("CONSULTA FINALIZADA");
         
         return filas;
     }
@@ -63,7 +61,7 @@ public class DAOTransacciones extends ConnManager {
         return filas;
     }
     
-    private List<List<String>> getResults(ResultSet rs) throws SQLException{
+    private List<List<String>> getResults(ResultSet rs) throws SQLException {
         ResultSetMetaData rsmd = rs.getMetaData();
         Integer columnsNumber = rsmd.getColumnCount();
         List<String> columnas;
@@ -86,14 +84,14 @@ public class DAOTransacciones extends ConnManager {
         List<List<String>> filas;
         String[][] registros = null;
 
-        LOGGER.info("CONSULTA INICIADA");
+        System.out.println("CONSULTA INICIADA");
         filas = getResults(rs);
-    	LOGGER.info("CONSULTA FINALIZADA");
+    	System.out.println("CONSULTA FINALIZADA");
         
         if (filas.isEmpty()){
-            LOGGER.info("Sin informacion para procesar");
+            System.out.println("Sin informacion para procesar");
         } else {
-            LOGGER.info("filas: " + filas.size() + " | columnas: " + filas.get(0).size());
+            System.out.println("filas: " + filas.size() + " | columnas: " + filas.get(0).size());
 
             registros = new String[filas.size()][];
             for (Integer i = 0; i < filas.size(); i++) {
