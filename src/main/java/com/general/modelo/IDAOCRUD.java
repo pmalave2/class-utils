@@ -3,9 +3,9 @@ package com.general.modelo;
 import java.util.List;
 
 public interface IDAOCRUD<T> {
-    public Boolean insertar(T Objeto);
-    public T buscar(T Objeto);
-    public Boolean modificar(T Objeto);
-    public Boolean eliminar(T Objeto);
+    public Boolean insertar(T obj);
+    public T buscar(T obj);
+    public Boolean modificar(T obj);
+    public Boolean eliminar(T obj);
     public List<T> listar();
 }
