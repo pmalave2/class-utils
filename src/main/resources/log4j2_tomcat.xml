@@ -6,15 +6,15 @@
                 <Pattern>%-5p | %d{yyyy-MM-dd HH:mm:ss} | [%t] %logger{36} : %m%n</Pattern>
             </PatternLayout> 
         </Console>
-        <RandomAccessFile name="RAF" fileName="${sys:catalina.home}/logs/app.log" immediateFlush="false" append="true">
+        <RollingRandomAccessFile name="RAF" fileName="${sys:catalina.home}/logs/app.log" filePattern="app-%d{MM-dd-yyyy}.txt">
             <PatternLayout>
                 <Pattern>%-5p | %d{yyyy-MM-dd HH:mm:ss} | [%t] %logger{36} : %m%n</Pattern>
             </PatternLayout>
             <Policies>
-                <SizeBasedTriggeringPolicy size="100 MB"/>
+                <SizeBasedTriggeringPolicy size="50 MB"/>
             </Policies>
             <DefaultRolloverStrategy max="5"/>
-        </RandomAccessFile>
+        </RollingRandomAccessFile>
     </Appenders>
     <Loggers>
         <asyncRoot level="error">

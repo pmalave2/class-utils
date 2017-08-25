@@ -3,27 +3,31 @@
     <Appenders>
         <Console name="STDOUT" target="SYSTEM_OUT">
             <PatternLayout>
-                <Pattern>%-5p | %d{yyyy-MM-dd HH:mm:ss} | [%t] %C{2} (%F:%L) - %m%n</Pattern>
+                <Pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Pattern>
             </PatternLayout> 
         </Console>
-        <RandomAccessFile name="RAF" fileName="app.log" immediateFlush="false" append="true">
+        <RollingRandomAccessFile name="RAF" fileName="app.log" filePattern="app-%d{MM-dd-yyyy}.txt">
             <PatternLayout>
-                <Pattern>%-5p | %d{yyyy-MM-dd HH:mm:ss} | [%t] - %m%n</Pattern>
-            </PatternLayout> 
-        </RandomAccessFile>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%-6p] %c{3} - %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="50 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="5"/>
+        </RollingRandomAccessFile>
     </Appenders>
     <Loggers>
-        <asyncRoot level="error">
+        <Root level="error">
             <AppenderRef ref="RAF"/>
             <AppenderRef ref="STDOUT"/>
-        </asyncRoot>
-        <asyncRoot level="info">
+        </Root>
+        <Root level="info">
             <AppenderRef ref="RAF"/>
             <AppenderRef ref="STDOUT"/>
-        </asyncRoot>
-        <asyncRoot level="trace">
+        </Root>
+        <Root level="trace">
             <AppenderRef ref="RAF"/>
             <AppenderRef ref="STDOUT"/>
-        </asyncRoot>
+        </Root>
     </Loggers>
 </Configuration>
