@@ -6,7 +6,7 @@
                 <Pattern>%-5p | %d{yyyy-MM-dd HH:mm:ss} | [%t] %logger{36} : %m%n</Pattern>
             </PatternLayout> 
         </Console>
-        <RollingRandomAccessFile name="RAF" fileName="${sys:catalina.home}/logs/app.log" filePattern="app-%d{MM-dd-yyyy}.txt">
+        <RollingRandomAccessFile name="RAF" fileName="${sys:catalina.home}/logs/app.log" filePattern="app-%d{MM-dd-yyyy}.log">
             <PatternLayout>
                 <Pattern>%-5p | %d{yyyy-MM-dd HH:mm:ss} | [%t] %logger{36} : %m%n</Pattern>
             </PatternLayout>

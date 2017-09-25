@@ -6,7 +6,7 @@
                 <Pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Pattern>
             </PatternLayout> 
         </Console>
-        <RollingRandomAccessFile name="RAF" fileName="app.log" filePattern="app-%d{MM-dd-yyyy}.txt">
+        <RollingRandomAccessFile name="RAF" fileName="${sys:user.dir}/app.log" filePattern="app-%d{MM-dd-yyyy}.log">
             <PatternLayout>
                 <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%-6p] %c{3} - %m%n</Pattern>
             </PatternLayout>
