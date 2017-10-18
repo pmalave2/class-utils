@@ -17,17 +17,9 @@
         </RollingRandomAccessFile>
     </Appenders>
     <Loggers>
-        <Root level="error">
-            <AppenderRef ref="RAF"/>
-            <AppenderRef ref="STDOUT"/>
-        </Root>
         <Root level="info">
             <AppenderRef ref="RAF"/>
             <AppenderRef ref="STDOUT"/>
-        </Root>
-        <Root level="trace">
-            <AppenderRef ref="RAF"/>
-            <AppenderRef ref="STDOUT"/>
-        </Root>
+        </Root> 
     </Loggers>
 </Configuration>

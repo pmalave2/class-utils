@@ -3,12 +3,12 @@
     <Appenders>
         <Console name="STDOUT" target="SYSTEM_OUT">
             <PatternLayout>
-                <Pattern>%-5p | %d{yyyy-MM-dd HH:mm:ss} | [%t] %logger{36} : %m%n</Pattern>
+                <Pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Pattern>
             </PatternLayout> 
         </Console>
-        <RollingRandomAccessFile name="RAF" fileName="${sys:catalina.home}/logs/app.log" filePattern="app-%d{MM-dd-yyyy}.log">
+        <RollingRandomAccessFile name="RAF" fileName="${sys:user.dir}/app.log" filePattern="app-%d{MM-dd-yyyy}.log">
             <PatternLayout>
-                <Pattern>%-5p | %d{yyyy-MM-dd HH:mm:ss} | [%t] %logger{36} : %m%n</Pattern>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%-6p] %c{3} - %m%n</Pattern>
             </PatternLayout>
             <Policies>
                 <SizeBasedTriggeringPolicy size="50 MB"/>
@@ -17,17 +17,9 @@
         </RollingRandomAccessFile>
     </Appenders>
     <Loggers>
-        <asyncRoot level="error">
+        <Root level="info">
             <AppenderRef ref="RAF"/>
             <AppenderRef ref="STDOUT"/>
-        </asyncRoot>
-        <asyncRoot level="info">
-            <AppenderRef ref="RAF"/>
-            <AppenderRef ref="STDOUT"/>
-        </asyncRoot>
-        <asyncRoot level="trace">
-            <AppenderRef ref="RAF"/>
-            <AppenderRef ref="STDOUT"/>
-        </asyncRoot>
+        </Root> 
     </Loggers>
 </Configuration>
