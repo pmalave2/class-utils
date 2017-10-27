@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN" name="general">
     <Appenders>
-        <Console name="STDOUT" target="SYSTEM_OUT">
+        <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout>
                 <Pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Pattern>
             </PatternLayout> 
@@ -11,7 +11,7 @@
                 <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%-6p] %c{3} - %m%n</Pattern>
             </PatternLayout>
             <Policies>
-                <SizeBasedTriggeringPolicy size="50 MB"/>
+                <SizeBasedTriggeringPolicy size="5 MB"/>
             </Policies>
             <DefaultRolloverStrategy max="5"/>
         </RollingRandomAccessFile>
@@ -19,7 +19,7 @@
     <Loggers>
         <Root level="info">
             <AppenderRef ref="RAF"/>
-            <AppenderRef ref="STDOUT"/>
+            <AppenderRef ref="Console"/>
         </Root> 
     </Loggers>
 </Configuration>
