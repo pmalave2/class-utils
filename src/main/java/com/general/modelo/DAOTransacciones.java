@@ -23,9 +23,7 @@ public class DAOTransacciones extends ConnManager {
     }
 
     public List<String[][]> getTransacciones(CallableStatement sentencia) throws Exception {
-        List<List<String>> filas;
         List<String[][]> lista = new ArrayList<>();
-        String[][] registros = null;
         
         lista.add(getResultsArray(consultar(sentencia)));
                 
@@ -70,7 +68,7 @@ public class DAOTransacciones extends ConnManager {
         while (rs.next()){
             columnas = new ArrayList<>();
             for (Integer i = 1 ; i <= columnsNumber ; i++){
-                columnas.add(StringUtils.trim(rs.getString(i)));
+                columnas.add(getColumn(rs, i));
             }
             filas.add(columnas);
         }
@@ -105,4 +103,7 @@ public class DAOTransacciones extends ConnManager {
         return registros;
     }
 
+    public String getColumn(ResultSet rs, Integer columnIndex) throws SQLException {
+        return StringUtils.trim(rs.getString(columnIndex));
+    }
 }
