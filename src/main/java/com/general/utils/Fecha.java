@@ -22,7 +22,6 @@ public class Fecha {
     }
 
     public Fecha(Date fecha) {
-        super();
         this.fecha = fecha;
     }
 
