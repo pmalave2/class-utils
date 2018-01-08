@@ -46,6 +46,10 @@ public class ConnManager {
     }
     
     public ConnManager conectar() throws Exception {
+        return conectar(Boolean.TRUE);
+    }
+
+    public ConnManager conectar(Boolean AutoCommit) throws Exception {
         try {
             Class.forName(driver);
         } catch (ClassNotFoundException ex) {
@@ -53,6 +57,7 @@ public class ConnManager {
         }
 
         conexion = DriverManager.getConnection(connectionString, usuarioBD, passwordUsuarioBD);
+        conexion.setAutoCommit(AutoCommit);
         
         return this;
     }
