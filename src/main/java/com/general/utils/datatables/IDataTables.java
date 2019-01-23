@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.data.jpa.datatables.mapping.DataTablesInput;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
-public interface IBeanDataTables<T> {
-	List<T> getData();
+public interface IDataTables<T> {
+	List<T> getDataList();
 
 	DataTablesOutput<T> getDataTables(DataTablesInput dataTablesInput, List<T> data);
 

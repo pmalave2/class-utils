@@ -1,2 +1,83 @@
-/target/
-.svn
+# Typically *NIX text editors, by default, append '~' to files on saving to make backups
+*~
+
+# Gradle work directory
+.gradle
+
+# Maven
+pom.xml.versionsBackup
+
+# Build output directies
+/target
+*/target
+*/**/target
+/build
+*/build
+testdb
+
+# IntelliJ specific files/directories
+out
+.idea
+*.ipr
+*.iws
+*.iml
+atlassian-ide-plugin.xml
+
+# Eclipse specific files/directories
+.classpath
+.project
+.settings
+.metadata
+bin
+.factorypath
+
+# NetBeans specific files/directories
+.nbattrs
+.nb-gradle*
+
+# Miscellaneous
+*.log
+.clover
+
+#JRebel Files
+**/*rebel*.xml
+**/*rebel*.bak
+
+#Binary files
+**/*.ear
+
+#Bulk configuration files
+
+docker/volumes/deployments/emp\.war\.deployed
+
+docker/volumes/deployments/emp\.war
+
+docker/volumes/deployments/emp\.war\.isdeploying
+
+**/*.isundeploying
+
+**/*.failed
+
+docker/volumes/deployments/bonita-all-in-one-7\.5\.4\.ear\.deployed
+
+nbactions\.xml
+
+dist/emp-war/nb-configuration\.xml
+
+components/dnk-idms-citizen-register/dnk-idms-citizen-register-rest/nb_jr_remoting\.cfg
+
+components/dnk-idms-citizen-register/dnk-idms-citizen-register-ui/nb_jr_remoting\.cfg
+
+docker/listener/listener\.war
+
+docker/server/ems-us/emp\.war
+
+docker/ttool/ttool\.war
+
+# Terraform
+**.tfstate
+**.tfstate.backup
+**/.terraform/
+
+docker/volumes/deployments/emp\.war\.dodeploy
+

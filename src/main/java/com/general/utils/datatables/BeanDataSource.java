@@ -1,5 +1,6 @@
 package com.general.utils.datatables;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -14,14 +15,23 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public abstract class BeanDataSource<T> implements IBeanDataTables<T> {
+public abstract class BeanDataSource<T> implements IDataTables<T> {
 	private List<T> data;
 	private List<T> dataFiltered;
 	private Class<T> beanClass;
 
-	public BeanDataSource(Class<T> beanClass) {
+	@SuppressWarnings("unchecked")
+	public BeanDataSource() {
 		super();
-		this.beanClass = beanClass;
+		this.beanClass = ((Class<T>) ((ParameterizedType) getClass().getGenericSuperclass())
+				.getActualTypeArguments()[0]);
+	}
+
+	public DataTablesOutput<T> getDataTables(DataTablesInput dti) {
+		if (dti.getDraw().equals(1))
+			setData(getDataList());
+
+		return getDataTables(dti, getData());
 	}
 
 	public DataTablesOutput<T> getDataTables(DataTablesInput dti, List<T> data) {
@@ -57,6 +67,7 @@ public abstract class BeanDataSource<T> implements IBeanDataTables<T> {
 		return dto;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<T> order(DataTablesInput dti, List<T> data) {
 		GroupComparator cg = new GroupComparator();
 
@@ -72,6 +83,7 @@ public abstract class BeanDataSource<T> implements IBeanDataTables<T> {
 		return data;
 	}
 
+	@Override
 	public List<T> search(DataTablesInput dti, List<T> data) {
 		List<BeanPredicate> lp = new ArrayList<>();
 

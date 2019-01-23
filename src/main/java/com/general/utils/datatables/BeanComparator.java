@@ -3,6 +3,8 @@ package com.general.utils.datatables;
 import java.lang.reflect.Method;
 import java.util.Comparator;
 
+import org.apache.commons.lang3.math.NumberUtils;
+
 /**
  * A comparator to sort on the specified field of a given class.
  *
@@ -123,13 +125,6 @@ public class BeanComparator implements Comparator {
 		if (field2 == null)
 			return isNullsLast ? -1 : 1;
 
-		// Handle numbers
-		try {
-			field1 = Double.valueOf(field1.toString());
-			field2 = Double.valueOf(field2.toString());
-		} catch (Exception e) {
-		}
-
 		// Compare objects
 
 		Object c1;
@@ -143,10 +138,17 @@ public class BeanComparator implements Comparator {
 			c2 = field1;
 		}
 
+		// Handle numbers
+		if (NumberUtils.isCreatable(c1.toString()) && NumberUtils.isCreatable(c2.toString())) {
+			c1 = NumberUtils.createNumber(c1.toString());
+			c2 = NumberUtils.createNumber(c2.toString());
+		}
+
+		if (c1 instanceof Number && c2 instanceof Number)
+			return Long.compare(((Number) c1).longValue(), ((Number) c2).longValue());
+
 		if (c1 instanceof Comparable) {
-			if (c1 instanceof Double)
-				return ((Double) c1).compareTo((Double) c2);
-			else if (c1 instanceof String && isIgnoreCase)
+			if (c1 instanceof String && isIgnoreCase)
 				return ((String) c1).compareToIgnoreCase((String) c2);
 			else
 				return ((Comparable) c1).compareTo(c2);
